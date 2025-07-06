@@ -1,13 +1,13 @@
-# Agora - Manuale tecnico
+# Manuale tecnico
 
-### Requisiti Linux
+### Requisiti
 - Docker Compose
 
-L'avvio su Windows può essere effettuato tramite WSL.
+L'avvio su Windows può essere effettuato tramite WSL o Docker Desktop.
 
 ### Preparazione
 
-- Da terminale (su Linux) o da WSL (su Windows) assicurarsi di salvare l'ip locale da inserire nel file .env nella variabile d'ambiente **WSL_DB_HOST**.
+- Da terminale (su Linux) o da WSL/Powershell (su Windows) assicurarsi di salvare l'ip locale da inserire nel file .env nella variabile d'ambiente **WSL_DB_HOST**.
 
 ```sh
 ip addr show eth0
@@ -27,18 +27,34 @@ Esempio:
 
 L'IP in questo esempio è 172.18.104.83
 
+### Powershell (Windows)
+
+```sh
+Get-NetAdapter
+```
+
+```sh
+Get-NetIPAddress -InterfaceAlias "Ethernet"
+```
+
+Sostituire "Ethernet" con il nome della propria interfaccia di rete.
+
+
 ### Avvio
 
-Dalla directory principale è sufficiente avviare il docker-compose.yml, che creerà automaticamente 3 container per il db MySQL, l'app Java Spring Boot per il backend, e il frontend.
+Dalla directory principale è sufficiente avviare il docker-compose.yml, che creerà automaticamente 3 container per il db MySQL, l'app Java Spring Boot per il backend.
 
-La landing page sarà poi accessibile da http://localhost <br>
+```sh
+docker compose up -d
+```
+
 Le REST API del backend sono accessibili da http://localhost:8080/api (fare rifermento a SwaggerUI o alla collection Postman)
 
 ### API
 
 Swagger UI URL: http://localhost:8080/swagger-ui/index.html
 
-Collection Postman presente al percorso **/postman/CodeCraft Backend - REST API.postman_collection.json**
+Collection Postman presente al percorso **/Final Test - REST API.postman_collection.json**
 
 Documentazione Javadoc Maven visionabile nel file **/javadoc_maven/apidocs.zip** (decomprimere)
 
@@ -46,8 +62,7 @@ Documentazione Javadoc Maven visionabile nel file **/javadoc_maven/apidocs.zip**
 
 - Backend: Java 17, Spring Boot 3.4, Maven 3.9
 - Database: MySQL
-- Approccio strutturale: MVC, REST API, db-first (le tabelle vengono generate automaticamente dall'app
+- Approccio strutturale: MVC, REST API, code-first (le tabelle vengono generate automaticamente dall'app
 tramite hibernate, se assenti o modificate)
 - Strumenti di sviluppo backend: JetBrains IntelliJ IDEA, Visual Studio Code, Docker
 - Strumenti API: Swagger UI, Postman
-- Repository GitHub: https://github.com/giordano-bruno-michela-its/CodeCraft_project
